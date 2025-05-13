@@ -1,0 +1,333 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/pressstart2p/v14/e3t4euO8T-267oIAQAu6jDQyK3nVivNm4I81.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'VT323';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/vt323/v17/pxiKyp0ihIEF2isQFJXUdVNF.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --background: 220 60% 8%;
+  --foreground: 0 0% 98%;
+  
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  
+  --primary: 355 90% 70%;
+  --primary-foreground: 0 0% 100%;
+  
+  --secondary: 180 69% 54%;
+  --secondary-foreground: 0 0% 100%;
+  
+  --accent: 59 84% 69%;
+  --accent-foreground: 0 0% 0%;
+  
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  
+  --ring: 240 4.9% 83.9%;
+  
+  --chart-1: 355 90% 70%;
+  --chart-2: 180 69% 54%;
+  --chart-3: 59 84% 69%;
+  --chart-4: 276 68% 68%;
+  --chart-5: 120 50% 50%;
+
+  --sidebar-background: 240 10% 3.9%;
+  --sidebar-foreground: 0 0% 98%;
+  --sidebar-primary: 355 90% 70%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 59 84% 69%;
+  --sidebar-accent-foreground: 0 0% 0%;
+  --sidebar-border: 240 3.7% 15.9%;
+  --sidebar-ring: 240 4.9% 83.9%;
+
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-[#1A1A2E] text-retro-white font-pixel;
+    image-rendering: pixelated;
+  }
+  
+  /* Custom utility classes */
+  .pixel-border {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px black;
+  }
+  
+  .shadow-pixel {
+    box-shadow: 4px 4px 0px #000000;
+  }
+  
+  .shadow-pixel-sm {
+    box-shadow: 2px 2px 0px #000000;
+  }
+}
+
+/* Retro background grid pattern */
+.grid-pattern {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(52, 52, 122, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52, 52, 122, 0.2) 1px, transparent 1px);
+  width: 100%;
+  height: 100%;
+  animation: grid-scroll 20s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes grid-scroll {
+  0% {
+    transform: perspective(500px) rotateX(5deg) translateY(0);
+  }
+  100% {
+    transform: perspective(500px) rotateX(5deg) translateY(40px);
+  }
+}
+
+/* Neon text effect */
+.text-shadow-neon {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 40px rgba(255, 255, 255, 0.5);
+}
+
+/* Pixel art border */
+.pixel-border::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 4px,
+    rgba(255, 255, 255, 0.1) 4px,
+    rgba(255, 255, 255, 0.1) 8px
+  );
+  z-index: -1;
+  animation: border-animation 2s linear infinite;
+}
+
+@keyframes border-animation {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(8px) translateY(0);
+  }
+}
+
+@layer components {
+  .pixel-button {
+    @apply relative inline-block py-2 px-4 text-white transition-all duration-100 transform translate-y-0;
+  }
+
+  .pixel-button:active {
+    @apply transform translate-y-1 shadow-none;
+  }
+
+  .progress-container {
+    @apply h-6 relative bg-retro-black border-2 border-white shadow-pixel;
+  }
+
+  .progress-bar {
+    @apply h-full bg-retro-teal;
+  }
+
+  .tab {
+    @apply cursor-pointer transition-all duration-200;
+  }
+
+  .tab.active {
+    @apply transform translate-y-1 shadow-none;
+  }
+
+  .pixel-card {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .pixel-card:hover {
+    @apply transform -translate-y-1;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-blink {
+  animation: blink 1s steps(1) infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.font-pixel {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.font-code {
+  font-family: 'VT323', monospace;
+}
+
+.bg-retro-navy {
+  background-color: #0F0F23;
+}
+
+.bg-retro-black {
+  background-color: #181825;
+}
+
+.bg-retro-gray {
+  background-color: #2E2E5B;
+}
+
+.bg-retro-red {
+  background-color: #FF355E;
+}
+
+.bg-retro-teal {
+  background-color: #00FFCC;
+}
+
+.bg-retro-yellow {
+  background-color: #FFEC3E;
+}
+
+.bg-retro-purple {
+  background-color: #9966FF;
+}
+
+.bg-retro-green {
+  background-color: #39FF14;
+}
+
+.bg-retro-blue {
+  background-color: #00BFFF;
+}
+
+.bg-retro-pink {
+  background-color: #FF69B4;
+}
+
+.bg-retro-orange {
+  background-color: #FF9933;
+}
+
+.bg-retro-cyan {
+  background-color: #00FFFF;
+}
+
+.text-retro-white {
+  color: #FFFFFF;
+}
+
+.text-retro-yellow {
+  color: #FFEC3E;
+}
+
+.text-retro-teal {
+  color: #00FFCC;
+}
+
+.text-retro-red {
+  color: #FF355E;
+}
+
+.text-retro-green {
+  color: #39FF14;
+}
+
+.text-retro-purple {
+  color: #9966FF;
+}
+
+.text-retro-blue {
+  color: #00BFFF;
+}
+
+.text-retro-pink {
+  color: #FF69B4;
+}
+
+.text-retro-orange {
+  color: #FF9933;
+}
+
+.text-retro-cyan {
+  color: #00FFFF;
+}
+
+.border-retro-white {
+  border-color: #FFFFFF;
+}
+
+.border-retro-red {
+  border-color: #FF355E;
+}
+
+.border-retro-gray {
+  border-color: #2E2E5B;
+}
+
+.border-retro-teal {
+  border-color: #00FFCC;
+}
+
+.border-retro-yellow {
+  border-color: #FFEC3E;
+}
+
+.border-retro-purple {
+  border-color: #9966FF;
+}
+
+.border-retro-green {
+  border-color: #39FF14;
+}
+
+.border-retro-blue {
+  border-color: #00BFFF;
+}
+
+.border-retro-cyan {
+  border-color: #00FFFF;
+}
